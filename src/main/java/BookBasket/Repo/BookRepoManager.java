@@ -84,11 +84,7 @@ public class BookRepoManager implements BookRepo {
 	public List<Book> findByPending() {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-	
 		List<Book> pending=(List<Book>) session.createQuery("from Book where Available=false",Book.class).getResultList();
-		
-		//List<Book> pending=session.createNativeQuery("from Book",Book.class).getResultList();
-		
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();

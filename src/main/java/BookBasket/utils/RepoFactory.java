@@ -1,5 +1,7 @@
 package BookBasket.utils;
 
+import BookBasket.Repo.AdminRepo;
+import BookBasket.Repo.AdminRepoManager;
 import BookBasket.Repo.BookRepo;
 import BookBasket.Repo.BookRepoManager;
 import BookBasket.Repo.UserRepo;
@@ -12,5 +14,9 @@ public class RepoFactory {
 		
 		public static UserRepo getUserRepo() {
 			return new UserRepoManager();
+		}
+		
+		public static AdminRepo getAdminRepo() {
+			return new AdminRepoManager();
 		}
 }

@@ -1,5 +1,7 @@
 package BookBasket.utils;
 
+import BookBasket.service.AdminService;
+import BookBasket.service.AdminServiceManager;
 import BookBasket.service.BookService;
 import BookBasket.service.BookServiceManager;
 import BookBasket.service.UserService;
@@ -12,6 +14,10 @@ public class ServiceFactory {
 	
 	public static UserService getUserService() {
 		return new UserServiceManager();
+	}
+	
+	public static AdminService getAdminService() {
+		return new AdminServiceManager();
 	}
 	
 }

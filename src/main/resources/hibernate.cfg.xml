@@ -28,6 +28,7 @@
 	<!-- List of XML mapping files -->
 	<mapping  class="BookBasket.model.Book"/>
 	<mapping  class="BookBasket.model.User"/>
+	<mapping  class="BookBasket.model.Admin"/>
       
    </session-factory>
 </hibernate-configuration>

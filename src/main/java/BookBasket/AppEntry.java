@@ -2,6 +2,7 @@ package BookBasket;
 
 import static spark.Spark.port;
 
+import BookBasket.controller.AdminController;
 import BookBasket.controller.BookController;
 import BookBasket.controller.UserController;
 
@@ -10,5 +11,6 @@ public class AppEntry {
 		port(8085);
 		BookController.initBookController();
 		UserController.initUserController();
+		AdminController.initAdminController();
 	}
 }
