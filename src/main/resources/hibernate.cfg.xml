@@ -22,8 +22,7 @@
 
 	<property name="hibernate.connection.password">
 		
-	</property>
-	<property name="hibernate.hbm2ddl.auto">create</property>  
+	</property> 
 	<property name="hibernate.hbm2ddl.auto">update</property>
 	
 	<!-- List of XML mapping files -->

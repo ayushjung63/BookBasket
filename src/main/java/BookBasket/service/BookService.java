@@ -2,6 +2,8 @@ package BookBasket.service;
 
 import java.util.List;
 
+import org.hibernate.annotations.Where;
+
 import BookBasket.model.Book;
 
 public interface BookService {
@@ -18,8 +20,9 @@ public interface BookService {
 	
 	public void viewByType(String Type);
 	
+	//@Where(clause="Accepted=false")
 	public List<Book> viewByPending();
-	
+
 	public List<Book> viewByAvailable();
 	
 }

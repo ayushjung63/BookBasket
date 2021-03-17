@@ -1,13 +1,9 @@
 package BookBasket.controller;
 
 import static spark.Spark.*;
-
 import com.google.gson.Gson;
-
-import BookBasket.Repo.BookRepoManager;
 import BookBasket.model.Book;
 import BookBasket.utils.ServiceFactory;
-import spark.Route;
 
 public class BookController {
 
@@ -40,30 +36,26 @@ public class BookController {
 	}
 
 	public static void deleteBook() {
-		  delete("/api/book/delete/:id", (req, res) -> { int
-		  id=Integer.parseInt(req.params("id"));
+		delete("/api/book/delete/:id", (req, res) -> { 
+		  int id=Integer.parseInt(req.params("id"));
+		  System.out.println(id);
 		  return ServiceFactory.getBookService().deleteBook(id); 
-		  });
+		});
 	}
-
-
-	public static void viewByPending() {
-		get("/api/book/pending", (req, res) -> {
-			return new Gson().toJson(ServiceFactory.getBookService().viewByPending());
+	
+	public static void pendingBooks() {
+		get("/api/book/pending",(req,res)->{
+			return ServiceFactory.getBookService().viewByPending();
 		});
 	}
 
-	public static void viewByAvailable() {
-		get("/api/book/available", (req, res) -> {
-			return new Gson().toJson(ServiceFactory.getBookService().viewByAvailable());
-		});
-	}
-
+	
 	public static void initBookController() {
 		viewAllBooks();
 		addBook();
 		viewById();
-		viewByPending();
-		viewByAvailable();
+		deleteBook();
+		//availableBooks();
+		pendingBooks();
 	}
 }

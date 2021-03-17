@@ -51,8 +51,7 @@ public class BookServiceManager implements BookService {
 
 	@Override
 	public Boolean deleteBook(int id) {
-		bookRepo.delete(id);
-		return null;
+		return bookRepo.delete(id);
 	}
 
 }

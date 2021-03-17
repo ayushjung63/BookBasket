@@ -2,8 +2,9 @@ package BookBasket.Repo;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
-import com.mysql.cj.Query;
+import org.hibernate.annotations.Where;
 
 import BookBasket.model.Book;
 import BookBasket.utils.SessionFactory;
@@ -30,11 +31,11 @@ public class BookRepoManager implements BookRepo {
 
 	@Override
 	public Boolean edit(int id) {
-		  session=sessionFactory.createEntityManager();
-		  session.getTransaction().begin();
-		  session.find(Book.class,id);
-		  session.remove(session);
-		  session.getTransaction().commit();
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		session.find(Book.class, id);
+		session.remove(session);
+		session.getTransaction().commit();
 		return true;
 	}
 
@@ -66,14 +67,16 @@ public class BookRepoManager implements BookRepo {
 	public List<Book> findByAvailable() {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		System.out.println("test");
-		javax.persistence.Query q=session.createNativeQuery("from Book where available=:condition");
-		q.setParameter("condition","true");
-		List<Book> available=q.getResultList();
+
+		Query query = session.createQuery("from Book as book where book.Available= :condition",Book.class);
+		query.setParameter("condition", "true");
+		List<Book> available =query.getResultList();
+
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();
 		}
+		System.out.println(available);
 		return available;
 	}
 
@@ -81,7 +84,11 @@ public class BookRepoManager implements BookRepo {
 	public List<Book> findByPending() {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		List<Book> pending = session.createQuery("from Book where accepted="+"false", Book.class).getResultList();
+	
+		List<Book> pending=(List<Book>) session.createQuery("from Book where Available=false",Book.class).getResultList();
+		
+		//List<Book> pending=session.createNativeQuery("from Book",Book.class).getResultList();
+		
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();
@@ -91,10 +98,9 @@ public class BookRepoManager implements BookRepo {
 
 	@Override
 	public Boolean delete(int id) {
-		session=sessionFactory.createEntityManager();
+		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		Book book=session.find(Book.class,id);
-		System.out.println(book);
+		Book book = session.find(Book.class, id);
 		session.remove(book);
 		session.getTransaction().commit();
 		if (session.isOpen()) {
