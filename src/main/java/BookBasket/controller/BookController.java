@@ -29,9 +29,11 @@ public class BookController {
 	}
 
 	public static void editBook() {
-		post("/api/book/edit/:id", (req, res) -> {
+		put("/api/book/edit/:id", (req, res) -> {
+			Book book = new Gson().fromJson(req.body(), Book.class);
+			System.out.println(book);
 			int id = Integer.parseInt(req.params("id"));
-			return ServiceFactory.getBookService().editBook(id);
+			return ServiceFactory.getBookService().editBook(id,book);
 		});
 	}
 

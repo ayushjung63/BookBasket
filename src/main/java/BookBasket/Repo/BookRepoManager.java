@@ -3,9 +3,6 @@ package BookBasket.Repo;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import org.hibernate.annotations.Where;
-
 import BookBasket.model.Book;
 import BookBasket.utils.SessionFactory;
 
@@ -30,10 +27,12 @@ public class BookRepoManager implements BookRepo {
 	}
 
 	@Override
-	public Boolean edit(int id) {
+	public Boolean edit(int id,Book b) {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		session.find(Book.class, id);
+		Book b1=session.find(Book.class, id);
+		b1.setId(id);
+		b1.setTitle(b.getTitle());
 		session.remove(session);
 		session.getTransaction().commit();
 		return true;

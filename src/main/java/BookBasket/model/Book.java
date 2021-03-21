@@ -18,8 +18,11 @@ public class Book {
 	private String description;
 	private String type;
 	private String image;
-	private String Accepted="false";
-	private String Available="true";
+	/*
+	 * private String Accepted="false"; private String Available="true";
+	 */
+	
+	private Status status = Status.ADMIN_PENDING;
 	
 	
 	public int getId() {
@@ -70,23 +73,29 @@ public class Book {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public String getAccepted() {
-		return Accepted;
+	
+	public Status getStatus() {
+		return status;
 	}
-	public void setAccepted(String accepted) {
-		Accepted = accepted;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
-	public String getAvailable() {
-		return Available;
+
+	public enum Status{
+		AVAILABLE,
+		USER_PENDING,
+		ADMIN_PENDING,
+		NOT_AVAILABLE,
+		ACCEPTED
 	}
-	public void setAvailable(String available) {
-		Available = available;
-	}
+
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", price=" + price + ", category="
-				+ category + ", description=" + description + ", type=" + type + ", image=" + image + ", Accepted="
-				+ Accepted + ", Available=" + Available + "]";
+				+ category + ", description=" + description + ", type=" + type + ", image=" + image + ", status="
+				+ status + "]";
 	}
+	
+	
 	
 }

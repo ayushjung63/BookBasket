@@ -10,7 +10,7 @@ public interface BookRepo {
 	
 	Boolean add(Book b);
 	
-	Boolean edit(int id);
+	Boolean edit(int id,Book b);
 	
 	Boolean delete(int id);
 	

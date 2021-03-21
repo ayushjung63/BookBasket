@@ -29,7 +29,6 @@ public class AdminRepoManager implements AdminRepo {
 
 	@Override
 	public Boolean findAdmin(String username) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

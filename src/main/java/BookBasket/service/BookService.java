@@ -14,7 +14,7 @@ public interface BookService {
 	
 	public Book viewById(int id);
 	
-	public Boolean editBook(int id);
+	public Boolean editBook(int id,Book b);
 	
 	public Boolean deleteBook(int id);
 	

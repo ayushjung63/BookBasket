@@ -45,8 +45,8 @@ public class BookServiceManager implements BookService {
 	}
 
 	@Override
-	public Boolean editBook(int id) {
-		return bookRepo.edit(id);
+	public Boolean editBook(int id,Book b) {
+		return bookRepo.edit(id,b);
 	}
 
 	@Override
