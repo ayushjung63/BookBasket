@@ -14,7 +14,6 @@ public interface BookRepo {
 	
 	Boolean delete(int id);
 	
-	List<Book> findByAvailable();
-	List<Book> findByPending();
+	List<Book> getByType(String type);
 	
 }

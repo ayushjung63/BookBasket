@@ -18,9 +18,8 @@ public class UserServiceManager implements UserService {
 	}
 
 	@Override
-	public Boolean checkUser(String username) {
-		userRepo.findUser(username);
-		return true;
+	public Boolean checkUser(User u) {
+		return userRepo.getUser(u);
 	}
 
 	@Override

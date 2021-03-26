@@ -15,17 +15,7 @@ public class UserRepoManager implements UserRepo {
 		sessionFactory=SessionFactory.getInstance();
 	}
 	
-	@Override
-	public User findUser(String username) {
-		session=sessionFactory.createEntityManager();
-		session.getTransaction().begin();
-		User user=(User) session.createQuery("from Book where username=username",User.class);
-		session.getTransaction().commit();
-		if(session.isOpen()) {
-			session.close();
-		}
-		return user;
-	}
+
 
 	@Override
 	public Boolean add(User user) {
@@ -49,6 +39,26 @@ public class UserRepoManager implements UserRepo {
 			session.close();
 		}
 		return allUser;
+	}
+
+
+
+	@Override
+	public  Boolean getUser(User user) {
+		session=sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		User dbUser=(User) session.createNamedQuery("findUserByUsername",User.class)
+				.setParameter("username", user.getUsername()).getSingleResult();
+		session.getTransaction().commit();
+		if(session.isOpen()) {
+			session.close();
+		}
+		if(user.getPassword().equals(dbUser.getPassword())) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 
 }

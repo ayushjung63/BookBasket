@@ -18,11 +18,9 @@ public interface BookService {
 	
 	public Boolean deleteBook(int id);
 	
-	public void viewByType(String Type);
+	public List<Book> viewByType(String Type);
 	
-	//@Where(clause="Accepted=false")
-	public List<Book> viewByPending();
+	public List<Book> viewByStatus();
 
-	public List<Book> viewByAvailable();
 	
 }

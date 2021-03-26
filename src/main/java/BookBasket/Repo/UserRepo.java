@@ -5,7 +5,7 @@ import java.util.List;
 import BookBasket.model.User;
 
 public interface UserRepo {
-	User findUser(String username);
+	Boolean getUser(User user);
 	
 	Boolean add(User user);
 	

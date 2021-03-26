@@ -3,9 +3,20 @@ package BookBasket.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+
+@NamedQueries(
+		@NamedQuery(
+			name = "findUserByUsername",
+			query="from User where username=:username"
+	)
+	)
+	
 
 @Entity
 public class User {
+	
 	@Id
 	@GeneratedValue
 	private int id;

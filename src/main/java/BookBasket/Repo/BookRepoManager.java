@@ -3,6 +3,8 @@ package BookBasket.Repo;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import BookBasket.model.Book;
 import BookBasket.utils.SessionFactory;
 
@@ -31,9 +33,17 @@ public class BookRepoManager implements BookRepo {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		Book b1=session.find(Book.class, id);
+		
 		b1.setId(id);
 		b1.setTitle(b.getTitle());
-		session.remove(session);
+		b1.setAuthor(b.getAuthor());
+		b1.setCategory(b.getCategory());
+		b1.setDescription(b.getDescription());
+		b1.setPrice(b.getPrice());
+		b1.setImage(b.getImage());
+		/* b1.setStatus(b.getStatus()); */
+		b1.setType(b.getType());
+
 		session.getTransaction().commit();
 		return true;
 	}
@@ -63,33 +73,15 @@ public class BookRepoManager implements BookRepo {
 	}
 
 	@Override
-	public List<Book> findByAvailable() {
+	public List<Book> getByType(String type) {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-
-		Query query = session.createQuery("from Book as book where book.Available= :condition",Book.class);
-		query.setParameter("condition", "true");
-		List<Book> available =query.getResultList();
-
-		session.getTransaction().commit();
-		if (session.isOpen()) {
-			session.close();
-		}
-		System.out.println(available);
-		return available;
+		Query q=session.createNamedQuery("from Book where type=:type",Book.class);
+		q.setParameter("type",type);
+		List<Book> result=q.getResultList();
+		return result;
 	}
 
-	@Override
-	public List<Book> findByPending() {
-		session = sessionFactory.createEntityManager();
-		session.getTransaction().begin();
-		List<Book> pending=(List<Book>) session.createQuery("from Book where Available=false",Book.class).getResultList();
-		session.getTransaction().commit();
-		if (session.isOpen()) {
-			session.close();
-		}
-		return pending;
-	}
 
 	@Override
 	public Boolean delete(int id) {

@@ -15,8 +15,7 @@ public class BookServiceManager implements BookService {
 	
 	@Override
 	public boolean addBook(Book b) {
-		bookRepo.add(b);
-		return true;
+		return bookRepo.add(b);
 	}
 
 	@Override
@@ -24,25 +23,13 @@ public class BookServiceManager implements BookService {
 		return bookRepo.allBooks();
 	}
 
-	@Override
-	public void viewByType(String type) {
-		
-	}
+	
 
 	@Override
 	public Book viewById(int id) {
 		return bookRepo.findById(id);
 	}
 
-	@Override
-	public List<Book> viewByAvailable() {
-		return bookRepo.findByAvailable();
-	}
-
-	@Override
-	public List<Book> viewByPending() {
-		return bookRepo.findByPending();
-	}
 
 	@Override
 	public Boolean editBook(int id,Book b) {
@@ -53,5 +40,18 @@ public class BookServiceManager implements BookService {
 	public Boolean deleteBook(int id) {
 		return bookRepo.delete(id);
 	}
+
+	@Override
+	public List<Book> viewByType(String type) {
+		return bookRepo.getByType(type);
+	}
+
+	@Override
+	public List<Book> viewByStatus() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

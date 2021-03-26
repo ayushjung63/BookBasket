@@ -10,7 +10,7 @@ import BookBasket.utils.SessionFactory;
 public class AppEntry {
 	public static void main(String[] args) {
 		port(8085);
-		SessionFactory.getInstance();
+		BookController.add();
 		BookController.initBookController();
 		UserController.initUserController();
 		AdminController.initAdminController();

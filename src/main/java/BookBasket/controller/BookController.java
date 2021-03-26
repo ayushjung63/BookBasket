@@ -7,10 +7,11 @@ import BookBasket.utils.ServiceFactory;
 
 public class BookController {
 
-	public static void addBook() {
-		post("api/addbook", (req, res) -> {
-			Book book = new Gson().fromJson(req.body(), Book.class);
-			return ServiceFactory.getBookService().addBook(book);
+	public static void add() {
+		post("/api/book/add",(req,res)->{
+			return ServiceFactory.getBookService().addBook(
+					new Gson().fromJson(req.body(), Book.class)
+					);
 		});
 	}
 
@@ -45,19 +46,21 @@ public class BookController {
 		});
 	}
 	
-	public static void pendingBooks() {
-		get("/api/book/pending",(req,res)->{
-			return ServiceFactory.getBookService().viewByPending();
+	public static void bookType() {
+		get("/api/book/type/{type}",(req,res)->{
+			String type=req.params("type");
+			System.out.println(type);
+			return ServiceFactory.getBookService().viewByType(type);
 		});
 	}
+	
 
 	
 	public static void initBookController() {
 		viewAllBooks();
-		addBook();
+		add();
 		viewById();
 		deleteBook();
-		//availableBooks();
-		pendingBooks();
+		bookType();
 	}
 }

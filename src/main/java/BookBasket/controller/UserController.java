@@ -13,9 +13,9 @@ import spark.Spark.*;
 public class UserController {
 	
 	public static void login() {
-		get("api/user/login/:username",(req,res)->{
-			String username=req.params("username");
-			return ServiceFactory.getUserService().checkUser(username);
+		post("api/user/login",(req,res)->{
+			User user=new Gson().fromJson(req.body(), User.class);
+			return ServiceFactory.getUserService().checkUser(user);
 		});
 		}
 	
