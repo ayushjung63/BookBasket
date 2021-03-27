@@ -47,9 +47,13 @@ public class BookServiceManager implements BookService {
 	}
 
 	@Override
-	public List<Book> viewByStatus() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Book> viewByCategory(String category) {
+		return bookRepo.getByCategory(category);
+	}
+
+	@Override
+	public List<Book> viewByAuthor(String author) {
+		return bookRepo.getByAuthor(author);
 	}
 
 	

@@ -76,9 +76,12 @@ public class BookRepoManager implements BookRepo {
 	public List<Book> getByType(String type) {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		Query q=session.createNamedQuery("from Book where type=:type",Book.class);
-		q.setParameter("type",type);
-		List<Book> result=q.getResultList();
+		List<Book> result=session.createNamedQuery("findBytype",Book.class).setParameter("type",type).getResultList();
+		System.out.println(result);
+		session.getTransaction().commit();
+		if(session.isOpen()) {
+			session.close();
+		}
 		return result;
 	}
 
@@ -94,6 +97,24 @@ public class BookRepoManager implements BookRepo {
 			session.close();
 		}
 		return true;
+	}
+
+	@Override
+	public List<Book> getByCategory(String category) {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<Book> result=session.createNamedQuery("findByCategory",Book.class)
+				.setParameter("category",category).getResultList();
+		return result;
+	}
+
+	@Override
+	public List<Book> getByAuthor(String author) {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<Book> result=session.createNamedQuery("findByAuthor",Book.class)
+				.setParameter("author", author).getResultList();
+		return result;
 	}
 
 }

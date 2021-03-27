@@ -34,7 +34,6 @@ public class UserController {
 	}
 		
 	
-	
 	public static void initUserController() {
 		login();
 		addUser();

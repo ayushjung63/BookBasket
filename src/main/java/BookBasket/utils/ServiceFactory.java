@@ -4,6 +4,8 @@ import BookBasket.service.AdminService;
 import BookBasket.service.AdminServiceManager;
 import BookBasket.service.BookService;
 import BookBasket.service.BookServiceManager;
+import BookBasket.service.OrderService;
+import BookBasket.service.OrderServiceManager;
 import BookBasket.service.UserService;
 import BookBasket.service.UserServiceManager;
 
@@ -20,4 +22,7 @@ public class ServiceFactory {
 		return new AdminServiceManager();
 	}
 	
+	public static OrderService getOrderService() {
+		return new OrderServiceManager();
+	}
 }

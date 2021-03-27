@@ -15,5 +15,7 @@ public interface BookRepo {
 	Boolean delete(int id);
 	
 	List<Book> getByType(String type);
+	List<Book> getByCategory(String category);
+	List<Book> getByAuthor(String author);
 	
 }

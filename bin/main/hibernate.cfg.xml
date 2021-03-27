@@ -29,6 +29,7 @@
 	<mapping  class="BookBasket.model.Book"/>
 	<mapping  class="BookBasket.model.User"/>
 	<mapping  class="BookBasket.model.Admin"/>
+	<mapping  class="BookBasket.model.UserOrder"/>
       
    </session-factory>
 </hibernate-configuration>

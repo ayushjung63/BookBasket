@@ -18,9 +18,9 @@ public interface BookService {
 	
 	public Boolean deleteBook(int id);
 	
-	public List<Book> viewByType(String Type);
+	public List<Book> viewByType(String type);
 	
-	public List<Book> viewByStatus();
+	public List<Book> viewByCategory(String  category);
 
-	
+	public List<Book> viewByAuthor(String author);
 }

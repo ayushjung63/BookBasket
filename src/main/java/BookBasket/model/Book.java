@@ -3,7 +3,28 @@ package BookBasket.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+
+@NamedQueries({
+		@NamedQuery(
+				name="findBytype",
+				query="from Book where type=:type"
+				),
+		@NamedQuery(
+				name="findByCategory",
+				query="from Book where category=:category"
+				),
+		@NamedQuery(
+				name="findByStatus",
+				query="from Book where status=:status"
+				),
+		@NamedQuery(
+				name="findByAuthor",
+				query="from Book where author=:author "
+				)
+})
 
 @Entity
 public class Book {
