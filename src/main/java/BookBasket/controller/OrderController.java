@@ -9,7 +9,7 @@ import BookBasket.utils.ServiceFactory;
 public class OrderController {
 	
 	public static void orderBook() {
-		post("/api/order",(req,res)->{
+		post("/api/order/addorder",(req,res)->{
 			UserOrder order=new Gson().fromJson(req.body(),UserOrder.class);
 			System.out.println(order);
 			return ServiceFactory.getOrderService().addOrder(order);
@@ -17,8 +17,8 @@ public class OrderController {
 	}
 	
 	public static void getAllOrder() {
-		get("/api/allorder",(req,res)->{
-			return ServiceFactory.getOrderService().allOrder();
+		get("/api/order/allorder",(req,res)->{
+			return new Gson().toJson(ServiceFactory.getOrderService().allOrder());
 		});
 	}
 	

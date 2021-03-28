@@ -21,7 +21,6 @@ public class UserOrder{
 	@OneToOne
 	private Book bookId;
 	private int status;
-	private long orderedDate;
 	
 	public int getId() {
 		return id;
@@ -46,14 +45,6 @@ public class UserOrder{
 		this.bookId = bookId;
 	}
 
-	
-	public long getOrderedDate() {
-		return orderedDate;
-	}
-
-	public void setOrderedDate(long orderedDate) {
-		this.orderedDate = orderedDate;
-	}
 
 	public int getStatus() {
 		return status;

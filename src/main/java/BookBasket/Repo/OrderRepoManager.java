@@ -18,14 +18,19 @@ public class OrderRepoManager implements OrderRepo {
 	
 	@Override
 	public 	boolean addOrder(UserOrder order) {
-		session=sessionFactory.createEntityManager();
-		session.getTransaction().begin();
-		session.persist(order);
-		session.getTransaction().commit();
-		if(session.isOpen()) {
-			session.close();
+		try {
+			session = sessionFactory.createEntityManager();
+			session.getTransaction().begin();
+			session.persist(order);
+			session.getTransaction().commit();
+			if (session.isOpen()) {
+				session.close();
+			}
+			return true;
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		return true;
+		return false;
 	}
 
 	@Override
