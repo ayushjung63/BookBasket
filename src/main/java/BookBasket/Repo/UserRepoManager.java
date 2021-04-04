@@ -15,8 +15,6 @@ public class UserRepoManager implements UserRepo {
 		sessionFactory=SessionFactory.getInstance();
 	}
 	
-
-
 	@Override
 	public Boolean add(User user) {
 		session=sessionFactory.createEntityManager();
@@ -41,10 +39,9 @@ public class UserRepoManager implements UserRepo {
 		return allUser;
 	}
 
-
-
 	@Override
-	public  Boolean getUser(User user) {
+	public  User getUser(User user) {
+		User result;
 		session=sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		User dbUser=(User) session.createNamedQuery("findUserByUsername",User.class)
@@ -54,11 +51,40 @@ public class UserRepoManager implements UserRepo {
 			session.close();
 		}
 		if(user.getPassword().equals(dbUser.getPassword())) {
-			return true;
-		}else {
-			return false;
+			result=dbUser;
+			result.setPassword("");
+			System.out.println(result);
+		}else{
+			result=null;
 		}
-		
+		return result;
 	}
+
+	@Override
+	public Boolean deleteUser(int id) {
+		session=sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		User user=session.find(User.class, id);
+		session.remove(user);
+		if(session.isOpen()) {
+			session.close();
+		}
+		return true;
+	}
+
+	@Override
+	public User editUser(int id,User user) {
+		session=sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		User dbUser=session.find(User.class, id);
+		dbUser.setAddress(user.getAddress());
+		dbUser.setContact(user.getContact());
+		dbUser.setEmail(user.getEmail());
+		return dbUser;
+	}
+
+	
+	
+	
 
 }

@@ -11,13 +11,13 @@ import BookBasket.model.UserOrder;
 public class OrderRepoManager implements OrderRepo {
 	private SessionFactory sessionFactory;
 	private EntityManager session;
-	
-	public OrderRepoManager(){
-		sessionFactory=BookBasket.utils.SessionFactory.getInstance();
+
+	public OrderRepoManager() {
+		sessionFactory = BookBasket.utils.SessionFactory.getInstance();
 	}
-	
+
 	@Override
-	public 	boolean addOrder(UserOrder order) {
+	public boolean addOrder(UserOrder order) {
 		try {
 			session = sessionFactory.createEntityManager();
 			session.getTransaction().begin();
@@ -27,7 +27,7 @@ public class OrderRepoManager implements OrderRepo {
 				session.close();
 			}
 			return true;
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
@@ -35,31 +35,34 @@ public class OrderRepoManager implements OrderRepo {
 
 	@Override
 	public List<UserOrder> getAllOrder() {
-		session=sessionFactory.createEntityManager();
+		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		List<UserOrder> allOrder=session.createQuery("From UserOrder",UserOrder.class).getResultList();
+		List<UserOrder> allOrder = session.createQuery("From UserOrder", UserOrder.class).getResultList();
 		session.getTransaction().commit();
-		if(session.isOpen()) {
+		if (session.isOpen()) {
 			session.close();
 		}
 		return allOrder;
 	}
 
 	@Override
-	public void getUserOrder(int id) {
-		/*
-		 * session=sessionFactory.createEntityManager();
-		 * session.getTransaction().begin(); List<UserOrder>
-		 * allOrder=session.createNamedQuery(null); session.getTransaction().commit();
-		 * if(session.isOpen()) { session.close(); } return allOrder;
-		 */
-
+	public List<UserOrder> getUserOrder(int id) {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<UserOrder> allOrder = session.createNamedQuery("findParticularOrder",UserOrder.class)
+				.setParameter("id",id).getResultList();
+		session.getTransaction().commit();
+		if (session.isOpen()) {
+			session.close();
+		}
+		return allOrder;
 	}
 
 	@Override
-	public void cancelOrder(UserOrder order) {
+	public boolean cancelOrder(UserOrder order) {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
+	
 }

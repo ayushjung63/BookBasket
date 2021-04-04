@@ -8,7 +8,7 @@ public interface UserService {
 	
 	Boolean addUser(User user);
 	
-	Boolean checkUser(User user);
+	User checkUser(User user);
 	
 	List<User> viewAllUser();
 

@@ -22,7 +22,11 @@ import javax.persistence.OneToOne;
 				),
 		@NamedQuery(
 				name="findByAuthor",
-				query="from Book where author=:author "
+				query="from Book where author=:author"
+				),
+		@NamedQuery(
+				name="availableBooks",
+				query="from Book where status=:status"
 				)
 })
 
@@ -42,11 +46,10 @@ public class Book {
 	@OneToOne
 	private User addedBy;
 	
-	private enum Status{
+	public enum Status{
 		AVAILABLE,
-		NOTAVAILABLE,
 		ADMINPENDING,
-		USERPENDING
+		BOOKED
 	}
 	
 	

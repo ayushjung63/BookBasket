@@ -32,4 +32,11 @@ public class AdminRepoManager implements AdminRepo {
 		return null;
 	}
 
+
+	@Override
+	public Boolean approveBook(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

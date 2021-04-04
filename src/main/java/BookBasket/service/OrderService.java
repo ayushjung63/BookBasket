@@ -8,5 +8,5 @@ import BookBasket.model.UserOrder;
 public interface OrderService {
 	boolean addOrder(UserOrder order);
 	List<UserOrder> allOrder();
-	void getParticularUserOrder(String id);
+	List<UserOrder> getParticularUserOrder(int id);
 }

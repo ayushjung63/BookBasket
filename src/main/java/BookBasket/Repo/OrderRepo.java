@@ -7,6 +7,6 @@ import BookBasket.model.UserOrder;
 public interface OrderRepo {
 	boolean addOrder(UserOrder order);
 	List<UserOrder> getAllOrder();
-	void getUserOrder(int id);
-	void cancelOrder(UserOrder order);
+	List<UserOrder> getUserOrder(int id);
+	boolean cancelOrder(UserOrder order);
 }

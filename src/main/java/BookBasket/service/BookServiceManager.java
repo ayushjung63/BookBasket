@@ -56,6 +56,16 @@ public class BookServiceManager implements BookService {
 		return bookRepo.getByAuthor(author);
 	}
 
+	@Override
+	public boolean bookBook(Book book) {
+		return bookRepo.bookBook(book);
+	}
+
+	@Override
+	public List<Book> availableBooks() {
+		return bookRepo.availableBooks();
+	}
+
 	
 
 }

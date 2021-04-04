@@ -49,23 +49,31 @@ public class BookController {
 	public static void bookType() {
 		get("/api/book/type/:type",(req,res)->{
 			String type=req.params("type");
-			return ServiceFactory.getBookService().viewByType(type);
+			return new Gson().toJson(ServiceFactory.getBookService().viewByType(type));
 		});
 	}
 	
 	public static void bookCategory() {
 		get("/api/book/category/:category",(req,res)->{
 			String category=req.params("category");
-			return ServiceFactory.getBookService().viewByCategory(category);
+			return new Gson().toJson(ServiceFactory.getBookService().viewByCategory(category));
+		});
+	}
+	
+	public static void availableBooks() {
+		get("/api/book/available",(req,res)->{
+			return new Gson().toJson(ServiceFactory.getBookService().availableBooks());
 		});
 	}
 	
 	public static void bookAuthor() {
 		get("/api/book/author/:author",(req,res)->{
 			String author=req.params("author");
-			return ServiceFactory.getBookService().viewByAuthor(author);
+			return new Gson().toJson(ServiceFactory.getBookService().viewByAuthor(author));
 		});
 	}
+	
+	
 	
 	public static void initBookController() {
 		viewAllBooks();
@@ -75,5 +83,6 @@ public class BookController {
 		bookType();
 		bookCategory();
 		bookAuthor();
+		availableBooks();
 	}
 }

@@ -23,4 +23,7 @@ public interface BookService {
 	public List<Book> viewByCategory(String  category);
 
 	public List<Book> viewByAuthor(String author);
+	
+	boolean bookBook(Book book);
+	List<Book> availableBooks();
 }

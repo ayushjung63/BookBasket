@@ -2,6 +2,7 @@ package BookBasket.service;
 
 import java.util.List;
 
+import BookBasket.Repo.BookRepo;
 import BookBasket.Repo.OrderRepo;
 import BookBasket.model.UserOrder;
 import BookBasket.utils.RepoFactory;
@@ -24,9 +25,8 @@ public class OrderServiceManager implements OrderService{
 	}
 
 	@Override
-	public void getParticularUserOrder(String id) {
-		// TODO Auto-generated method stub
-		
+	public List<UserOrder> getParticularUserOrder(int id) {
+		return orderRepo.getUserOrder(id);
 	}
 
 }

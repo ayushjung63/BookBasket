@@ -7,9 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+@NamedQueries({
+	@NamedQuery(name="findParticularOrder",query="from UserOrder where userId=:id")
+})
 
 @Entity
 public class UserOrder{

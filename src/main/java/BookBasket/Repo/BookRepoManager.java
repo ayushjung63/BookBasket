@@ -6,6 +6,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import BookBasket.model.Book;
+import BookBasket.model.Book.Status;
 import BookBasket.utils.SessionFactory;
 
 public class BookRepoManager implements BookRepo {
@@ -114,6 +115,45 @@ public class BookRepoManager implements BookRepo {
 		session.getTransaction().begin();
 		List<Book> result=session.createNamedQuery("findByAuthor",Book.class)
 				.setParameter("author", author).getResultList();
+		return result;
+	}
+
+	@Override 
+	public Boolean approveBook(int id) {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		Book book = session.find(Book.class, id);
+		book.setStatus(Status.AVAILABLE);
+		session.getTransaction().commit();
+		if(session.isOpen()) {
+			session.close();
+		}
+		return true;
+	}
+
+	@Override
+	public Boolean bookBook(Book book) {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		Book dbBook = session.find(Book.class, book.getId());
+		dbBook.setStatus(Status.BOOKED);
+		session.getTransaction().commit();
+		if(session.isOpen()) {
+			session.close();
+		}
+		return true;
+	}
+
+	@Override
+	public List<Book> availableBooks() {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<Book> result=session.createNamedQuery("availableBooks",Book.class)
+				.setParameter("status",Status.AVAILABLE).getResultList();
+		session.getTransaction().commit();
+		if(session.isOpen()) {
+			session.close();
+		}
 		return result;
 	}
 

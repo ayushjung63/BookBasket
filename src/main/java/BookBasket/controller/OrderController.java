@@ -12,7 +12,9 @@ public class OrderController {
 		post("/api/order/addorder",(req,res)->{
 			UserOrder order=new Gson().fromJson(req.body(),UserOrder.class);
 			System.out.println(order);
-			return ServiceFactory.getOrderService().addOrder(order);
+			ServiceFactory.getOrderService().addOrder(order);
+			ServiceFactory.getBookService().bookBook(order.getBookId());
+			return true;
 		});
 	}
 	
@@ -22,8 +24,16 @@ public class OrderController {
 		});
 	}
 	
+	public static void getParticularOrder() {
+		get("/api/order/:id",(req,res)->{
+			int id=Integer.parseInt(req.params("id"));
+			return new Gson().toJson(ServiceFactory.getOrderService().getParticularUserOrder(id));
+		});
+	}
+	
 	public static void initOrderController() {
 		orderBook();
 		getAllOrder();
+		getParticularOrder();
 	}
 }
