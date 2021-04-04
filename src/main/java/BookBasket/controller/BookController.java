@@ -62,7 +62,13 @@ public class BookController {
 	
 	public static void availableBooks() {
 		get("/api/book/available",(req,res)->{
+			try {
+				System.out.println("available books api ....");
 			return new Gson().toJson(ServiceFactory.getBookService().availableBooks());
+			}catch(Exception e) {
+				e.printStackTrace();
+				return false;
+			}
 		});
 	}
 	

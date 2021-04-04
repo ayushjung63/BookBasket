@@ -23,8 +23,6 @@ public class BookServiceManager implements BookService {
 		return bookRepo.allBooks();
 	}
 
-	
-
 	@Override
 	public Book viewById(int id) {
 		return bookRepo.findById(id);
@@ -63,6 +61,7 @@ public class BookServiceManager implements BookService {
 
 	@Override
 	public List<Book> availableBooks() {
+		System.out.println("service ........");
 		return bookRepo.availableBooks();
 	}
 

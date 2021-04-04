@@ -18,15 +18,11 @@ import javax.persistence.OneToOne;
 				),
 		@NamedQuery(
 				name="findByStatus",
-				query="from Book where status=:status"
+				query="from Book b where b.status=:status"
 				),
 		@NamedQuery(
 				name="findByAuthor",
 				query="from Book where author=:author"
-				),
-		@NamedQuery(
-				name="availableBooks",
-				query="from Book where status=:status"
 				)
 })
 
