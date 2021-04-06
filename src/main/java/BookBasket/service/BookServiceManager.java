@@ -60,9 +60,24 @@ public class BookServiceManager implements BookService {
 	}
 
 	@Override
-	public List<Book> availableBooks() {
+	public List<Book> availableBooks(String ab) {
 		System.out.println("service ........");
-		return bookRepo.availableBooks();
+		return bookRepo.availableBooks(ab);
+	}
+
+	@Override
+	public int countBooks() {
+		return bookRepo.getcountBooks();
+	}
+
+	@Override
+	public List<Book> userBooks(int id) {
+		return bookRepo.getUserBook(id);
+	}
+
+	@Override
+	public boolean approveBook(int id) {
+		return bookRepo.approveBook(id);
 	}
 
 	

@@ -61,10 +61,10 @@ public class BookController {
 	}
 	
 	public static void availableBooks() {
-		get("/api/book/available",(req,res)->{
-			try {
-				System.out.println("available books api ....");
-			return new Gson().toJson(ServiceFactory.getBookService().availableBooks());
+		get("/api/book/:ab",(req,res)->{
+			try { System.out.println("available books api ....");
+			String ab=req.params("ab");
+			return new Gson().toJson(ServiceFactory.getBookService().availableBooks(ab));
 			}catch(Exception e) {
 				e.printStackTrace();
 				return false;
@@ -79,6 +79,29 @@ public class BookController {
 		});
 	}
 	
+	public static void countAllBooks() {
+		get("/api/book/count",(req,res)->{
+			return ServiceFactory.getBookService().countBooks();
+		});
+	}
+	
+	public static void userBooks() {
+		get("/api/book/user/:id",(req,res)->{
+			int id=Integer.parseInt(req.params("id"));
+			return new Gson().toJson(ServiceFactory.getBookService().userBooks(id));
+		});
+	}
+	
+	public static void approveBook() {
+		get("/api/book/approve/:id", (req, res) -> {
+			int id = Integer.parseInt(req.params("id"));
+			System.out.println(id);
+			return ServiceFactory.getBookService().approveBook(id);
+		});
+	}
+	
+
+	
 	
 	
 	public static void initBookController() {
@@ -90,5 +113,8 @@ public class BookController {
 		bookCategory();
 		bookAuthor();
 		availableBooks();
+		countAllBooks();
+		userBooks();
+		approveBook();
 	}
 }

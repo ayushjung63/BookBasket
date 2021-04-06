@@ -23,6 +23,10 @@ import javax.persistence.OneToOne;
 		@NamedQuery(
 				name="findByAuthor",
 				query="from Book where author=:author"
+				),
+		@NamedQuery(
+				name="findByUser",
+				query="from Book where addedBy=:user"
 				)
 })
 

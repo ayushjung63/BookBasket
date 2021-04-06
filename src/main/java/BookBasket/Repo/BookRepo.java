@@ -15,6 +15,8 @@ public interface BookRepo {
 	List<Book> getByAuthor(String author);
 	Boolean approveBook(int id);
 	Boolean bookBook(Book book);
+	List<Book> availableBooks(String ab);
+	int getcountBooks();
 	
-	List<Book> availableBooks();
+	List<Book> getUserBook(int id);
 }

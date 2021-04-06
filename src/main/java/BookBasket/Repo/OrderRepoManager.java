@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 
 import org.hibernate.SessionFactory;
 
+import BookBasket.model.User;
 import BookBasket.model.UserOrder;
 
 public class OrderRepoManager implements OrderRepo {
@@ -47,10 +48,12 @@ public class OrderRepoManager implements OrderRepo {
 
 	@Override
 	public List<UserOrder> getUserOrder(int id) {
+		User user=new User();
+		user.setId(id);
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		List<UserOrder> allOrder = session.createNamedQuery("findParticularOrder",UserOrder.class)
-				.setParameter("id",id).getResultList();
+				.setParameter("id",user).getResultList();
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();

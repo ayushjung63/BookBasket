@@ -43,5 +43,6 @@ public class AppEntry {
 		AdminController.initAdminController();
 		OrderController.initOrderController();
 		ImageController.uploadImage();
+	
 	}
 }

@@ -2,7 +2,6 @@ package BookBasket.service;
 
 import java.util.List;
 
-import org.hibernate.annotations.Where;
 
 import BookBasket.model.Book;
 
@@ -25,5 +24,11 @@ public interface BookService {
 	public List<Book> viewByAuthor(String author);
 	
 	boolean bookBook(Book book);
-	List<Book> availableBooks();
+	boolean approveBook(int id);
+	
+	List<Book> availableBooks(String ab);
+	
+	int countBooks();
+	
+	List<Book> userBooks(int id);
 }
