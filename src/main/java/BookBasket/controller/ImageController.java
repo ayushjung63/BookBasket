@@ -14,7 +14,6 @@ public class ImageController {
 	
 	public static void uploadImage() {
 		post("/api/upload", (req, res) -> {
-			//C:\\Users\\ayush\\eclipse-workspace
 	        String destinationFolderLocation = "C:\\Users\\ayush\\eclipse-workspace\\BookBasket\\src\\main\\resources\\public\\images";
 	        req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(destinationFolderLocation));
 	        Part filePart = req.raw().getPart("myfile");
@@ -27,7 +26,7 @@ public class ImageController {
 	        }catch (Exception e){
 	            e.printStackTrace();
 	        }
-	        return "/images/"+fileName;
+	        return "http://localhost:8085/images/"+fileName;
 	    });
 	}
 	

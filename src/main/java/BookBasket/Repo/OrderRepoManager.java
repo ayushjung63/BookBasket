@@ -62,7 +62,17 @@ public class OrderRepoManager implements OrderRepo {
 	}
 
 	@Override
-	public boolean cancelOrder(UserOrder order) {
+	public boolean cancelOrder(int id) {
+		session=sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		UserOrder order=session.find(UserOrder.class, id);
+		order.setStatus(0);
+		session.getTransaction().commit();
+		return true;
+	}
+
+	@Override
+	public boolean checkIfOrderExists(UserOrder order) {
 		// TODO Auto-generated method stub
 		return false;
 	}

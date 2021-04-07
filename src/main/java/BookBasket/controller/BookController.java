@@ -2,6 +2,8 @@ package BookBasket.controller;
 
 import static spark.Spark.*;
 import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+
 import BookBasket.model.Book;
 import BookBasket.utils.ServiceFactory;
 
@@ -9,9 +11,19 @@ public class BookController {
 
 	public static void add() {
 		post("/api/book/add",(req,res)->{
-			return ServiceFactory.getBookService().addBook(
-					new Gson().fromJson(req.body(), Book.class)
-					);
+			Book b=null;
+			//String img=ImageController.uploadImage();
+			try {
+				b=new Gson().fromJson(req.body(), Book.class);
+			}catch(JsonParseException e) {
+				e.printStackTrace();
+				res.status(404);
+				return false;
+			}
+			if(b.getTitle()==null && b.getTitle()=="") {
+				return new BookBasket.model.Error(400,"Title cannot be null");
+			}
+			return ServiceFactory.getBookService().addBook(b);
 		});
 	}
 
@@ -62,13 +74,14 @@ public class BookController {
 	
 	public static void availableBooks() {
 		get("/api/book/:ab",(req,res)->{
-			try { System.out.println("available books api ....");
 			String ab=req.params("ab");
-			return new Gson().toJson(ServiceFactory.getBookService().availableBooks(ab));
+			try { 
+			System.out.println("available books api ....");
 			}catch(Exception e) {
 				e.printStackTrace();
 				return false;
 			}
+			return new Gson().toJson(ServiceFactory.getBookService().availableBooks(ab));
 		});
 	}
 	
@@ -79,10 +92,15 @@ public class BookController {
 		});
 	}
 	
-	public static void countAllBooks() {
-		get("/api/book/count",(req,res)->{
-			return ServiceFactory.getBookService().countBooks();
-		});
+	public static void countBooks() {
+		get("/api/book/countbook",(req,res)->{
+			try {
+				return ServiceFactory.getBookService().countBooks();
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			return false;
+			});
 	}
 	
 	public static void userBooks() {
@@ -113,8 +131,8 @@ public class BookController {
 		bookCategory();
 		bookAuthor();
 		availableBooks();
-		countAllBooks();
 		userBooks();
 		approveBook();
+		countBooks();
 	}
 }

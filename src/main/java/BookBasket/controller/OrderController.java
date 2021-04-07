@@ -11,10 +11,7 @@ public class OrderController {
 	public static void orderBook() {
 		post("/api/order/addorder",(req,res)->{
 			UserOrder order=new Gson().fromJson(req.body(),UserOrder.class);
-			System.out.println(order);
-			ServiceFactory.getOrderService().addOrder(order);
-			ServiceFactory.getBookService().bookBook(order.getBookId());
-			return true;
+			return ServiceFactory.getOrderService().addOrder(order);
 		});
 	}
 	
@@ -31,9 +28,17 @@ public class OrderController {
 		});
 	}
 	
+	public static void cancelOrder() {
+		get("/api/order/cancel/:id",(req,res)->{
+			int id=Integer.parseInt(req.params("id"));
+			return ServiceFactory.getOrderService().cancelOrder(id);
+		});
+	}
+	
 	public static void initOrderController() {
 		orderBook();
 		getAllOrder();
 		getParticularOrder();
+		cancelOrder();
 	}
 }

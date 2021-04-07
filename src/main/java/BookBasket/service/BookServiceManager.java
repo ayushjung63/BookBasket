@@ -4,6 +4,7 @@ import java.util.List;
 
 import BookBasket.Repo.BookRepo;
 import BookBasket.model.Book;
+import BookBasket.model.Book.Status;
 import BookBasket.utils.RepoFactory;
 
 public class BookServiceManager implements BookService {
@@ -15,6 +16,7 @@ public class BookServiceManager implements BookService {
 	
 	@Override
 	public boolean addBook(Book b) {
+		b.setStatus(Status.ADMINPENDING);
 		return bookRepo.add(b);
 	}
 

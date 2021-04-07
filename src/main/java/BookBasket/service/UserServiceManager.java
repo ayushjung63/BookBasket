@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import BookBasket.Repo.UserRepo;
+import BookBasket.model.Error;
 import BookBasket.model.User;
+import BookBasket.model.UserDTO;
 import BookBasket.utils.RepoFactory;
 import BookBasket.utils.SessionFactory;
 import BookBasket.utils.UserFactory;
@@ -18,14 +20,28 @@ public class UserServiceManager implements UserService {
 	}
 
 	@Override
-	public User checkUser(User u) {
-		return userRepo.getUser(u);
+	public UserDTO login(User u) {
+		User loggedUser= userRepo.getUser(u);
+		if(loggedUser!=null) {
+			UserDTO userdto=new UserDTO();
+			userdto.setId(loggedUser.getId());
+			userdto.setUsername(loggedUser.getUsername());
+			userdto.setAddress(loggedUser.getAddress());
+			userdto.setContact(loggedUser.getContact());
+			userdto.setEmail(loggedUser.getEmail());
+			return userdto;
+		}
+		return null;
 	}
 
 	@Override
 	public Boolean addUser(User user) {
-		userRepo.add(user);
-		return true;
+		User loggedUser= userRepo.getUser(user);
+		if(loggedUser==null) {
+			return userRepo.add(user);
+		}else {
+			return false;
+		}
 	}
 
 	@Override

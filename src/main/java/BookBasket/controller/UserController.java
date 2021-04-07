@@ -16,7 +16,7 @@ public class UserController {
 		post("api/user/login",(req,res)->{
 			 res.type("application/json");
 			User user=new Gson().fromJson(req.body(), User.class);
-			return new Gson().toJson(ServiceFactory.getUserService().checkUser(user));
+			return new Gson().toJson(ServiceFactory.getUserService().login(user));
 		});
 		}
 	

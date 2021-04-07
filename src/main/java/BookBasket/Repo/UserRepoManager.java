@@ -41,7 +41,6 @@ public class UserRepoManager implements UserRepo {
 
 	@Override
 	public  User getUser(User user) {
-		User result;
 		session=sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		User dbUser=(User) session.createNamedQuery("findUserByUsername",User.class)
@@ -50,14 +49,7 @@ public class UserRepoManager implements UserRepo {
 		if(session.isOpen()) {
 			session.close();
 		}
-		if(user.getPassword().equals(dbUser.getPassword())) {
-			result=dbUser;
-			result.setPassword("");
-			System.out.println(result);
-		}else{
-			result=null;
-		}
-		return result;
+		return dbUser;
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.UniqueConstraint;
 
 @NamedQueries(
 		@NamedQuery(
@@ -20,6 +21,7 @@ public class User {
 	@Id
 	@GeneratedValue
 	private int id;
+	
 	private String username;
 	private String password;
 	private String email;

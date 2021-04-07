@@ -20,7 +20,6 @@ public class BookRepoManager implements BookRepo {
 	public Boolean add(Book b) {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		b.setStatus(Status.ADMINPENDING);
 		session.persist(b);
 		session.getTransaction().commit();
 		if (session.isOpen()) {
@@ -70,6 +69,7 @@ public class BookRepoManager implements BookRepo {
 		if (session.isOpen()) {
 			session.close();
 		}
+		System.out.println(result.size());
 		return result;
 	}
 
@@ -150,7 +150,7 @@ public class BookRepoManager implements BookRepo {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		List<Book> result= session.createNamedQuery("findByStatus",Book.class)
-				.setParameter("status",Status.valueOf(ab))
+				.setParameter("status",Status.AVAILABLE)
 				.getResultList();
 		session.getTransaction().commit();
 		if(session.isOpen()) {
@@ -171,12 +171,12 @@ public class BookRepoManager implements BookRepo {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		List<Book> result = session.createQuery("from Book", Book.class).getResultList();
-		int book=result.size();
 		session.getTransaction().commit();
 		if (session.isOpen()) {
 			session.close();
 		}
-		return book;
+		int all=result.size();
+		return all;
 	}
 
 	@Override

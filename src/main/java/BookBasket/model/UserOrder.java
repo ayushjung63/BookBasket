@@ -14,7 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedQueries({
-	@NamedQuery(name="findParticularOrder",query="from UserOrder where userId=:id")
+	@NamedQuery(name="findParticularOrder",query="from UserOrder where user=:id")
 })
 
 @Entity
@@ -23,9 +23,9 @@ public class UserOrder{
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	@OneToOne
-	private User userId;
+	private User user;
 	@OneToOne
-	private Book bookId;
+	private Book book;
 	private int status;
 	
 	public int getId() {
@@ -35,23 +35,18 @@ public class UserOrder{
 		this.id = id;
 	}
 
-	public User getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
-
-	public void setUserId(User userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-	public Book getBookId() {
-		return bookId;
+	public Book getBook() {
+		return book;
 	}
-
-	public void setBookId(Book bookId) {
-		this.bookId = bookId;
+	public void setBook(Book book) {
+		this.book = book;
 	}
-
-
 	public int getStatus() {
 		return status;
 	}
