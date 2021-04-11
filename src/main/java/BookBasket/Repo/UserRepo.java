@@ -14,4 +14,6 @@ public interface UserRepo {
 	Boolean deleteUser(int id);
 	
 	User editUser(int id,User user);
+	
+	int countUser();
 }

@@ -35,10 +35,16 @@ public class OrderController {
 		});
 	}
 	
+	public static void countOrder() {
+		get("/order/count",(req,res)->{
+			return ServiceFactory.getOrderService().count();
+		});	}
+	
 	public static void initOrderController() {
 		orderBook();
 		getAllOrder();
 		getParticularOrder();
 		cancelOrder();
+		countOrder();
 	}
 }

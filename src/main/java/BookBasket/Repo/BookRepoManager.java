@@ -146,23 +146,24 @@ public class BookRepoManager implements BookRepo {
 
 	@Override
 	public List<Book> availableBooks(String ab) {
+		List<Book> result=null;
 		try {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		List<Book> result= session.createNamedQuery("findByStatus",Book.class)
-				.setParameter("status",Status.AVAILABLE)
+		result= session.createNamedQuery("findByStatus",Book.class)
+				.setParameter("status",Status.valueOf(ab))
 				.getResultList();
 		session.getTransaction().commit();
 		if(session.isOpen()) {
 			session.close();
 		}
-		return result;
+		
 		}catch(Exception e) {
 			System.out.println("exception....");
 			e.printStackTrace();
 			e.fillInStackTrace();
 		}
-		return null;
+		return result;
 	}
 
 	

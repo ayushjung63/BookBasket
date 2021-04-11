@@ -13,10 +13,17 @@ import BookBasket.utils.SessionFactory;
 import BookBasket.utils.UserFactory;
 
 public class UserServiceManager implements UserService {
+	
+
 	private UserRepo userRepo;
 	
 	public UserServiceManager() {
 		this.userRepo=RepoFactory.getUserRepo();
+	}
+	
+	@Override
+	public int count() {
+		return userRepo.countUser();
 	}
 
 	@Override

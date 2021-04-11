@@ -11,4 +11,7 @@ public interface OrderService {
 	List<UserOrder> getParticularUserOrder(int id);
 	
 	boolean cancelOrder(int id);
+	
+	
+	int count();
 }

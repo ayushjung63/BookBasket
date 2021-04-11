@@ -75,6 +75,19 @@ public class UserRepoManager implements UserRepo {
 		return dbUser;
 	}
 
+	@Override
+	public int countUser() {
+		session=sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<User> allUser=session.createQuery("from User",User.class).getResultList();
+		session.getTransaction().commit();
+		if(session.isOpen()) {
+			session.close();
+		}
+		int count=allUser.size();
+		return count;
+	}
+
 	
 	
 	

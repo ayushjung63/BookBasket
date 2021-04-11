@@ -18,7 +18,7 @@ import javax.persistence.OneToOne;
 				),
 		@NamedQuery(
 				name="findByStatus",
-				query="from Book b where b.status=:status"
+				query="from Book where status=:status"
 				),
 		@NamedQuery(
 				name="findByAuthor",

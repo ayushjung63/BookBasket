@@ -10,12 +10,19 @@ import BookBasket.model.UserOrder;
 import BookBasket.utils.RepoFactory;
 
 public class OrderServiceManager implements OrderService{
+	
+
 	private OrderRepo orderRepo;
 	private BookRepo bookRepo;
 	
 	public OrderServiceManager() {
 		this.orderRepo=RepoFactory.getOrderRepo();
 		this.bookRepo=RepoFactory.getBookRepo();
+	}
+	
+	@Override
+	public int count() {
+		return orderRepo.countOrder();
 	}
 	
 	@Override
@@ -45,7 +52,10 @@ public class OrderServiceManager implements OrderService{
 
 	@Override
 	public boolean cancelOrder(int id) {
-		return orderRepo.cancelOrder(id);
+		UserOrder order=orderRepo.getOneOrder(id); 
+		orderRepo.cancelOrder(id);
+		bookRepo.approveBook(order.getBook().getId());
+		 return true;
 	}
 
 }

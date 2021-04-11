@@ -12,5 +12,7 @@ public interface UserService {
 	UserDTO login(User user);
 	
 	List<User> viewAllUser();
+	
+	int count();
 
 }

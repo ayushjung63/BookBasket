@@ -10,11 +10,25 @@ import BookBasket.model.User;
 import BookBasket.model.UserOrder;
 
 public class OrderRepoManager implements OrderRepo {
+	
+
 	private SessionFactory sessionFactory;
 	private EntityManager session;
 
 	public OrderRepoManager() {
 		sessionFactory = BookBasket.utils.SessionFactory.getInstance();
+	}
+	
+	@Override
+	public int countOrder() {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<UserOrder> allOrder = session.createQuery("From UserOrder", UserOrder.class).getResultList();
+		session.getTransaction().commit();
+		if (session.isOpen()) {
+			session.close();
+		}
+		return allOrder.size();
 	}
 
 	@Override
@@ -70,11 +84,22 @@ public class OrderRepoManager implements OrderRepo {
 		session.getTransaction().commit();
 		return true;
 	}
+	
+	
 
 	@Override
 	public boolean checkIfOrderExists(UserOrder order) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public UserOrder getOneOrder(int id) {
+		session=sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		UserOrder order=session.find(UserOrder.class, id);
+		session.getTransaction().commit();
+		return order;
 	}
 
 	

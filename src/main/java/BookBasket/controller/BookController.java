@@ -73,16 +73,9 @@ public class BookController {
 	}
 	
 	public static void availableBooks() {
-		get("/api/book/:ab",(req,res)->{
-			String ab=req.params("ab");
-			try { 
-			System.out.println("available books api ....");
-			}catch(Exception e) {
-				e.printStackTrace();
-				return false;
-			}
-			return new Gson().toJson(ServiceFactory.getBookService().availableBooks(ab));
-		});
+		get("/available",(req,res)->{
+			return new Gson().toJson( ServiceFactory.getBookService().availableBooks("AVAILABLE"));
+			});
 	}
 	
 	public static void bookAuthor() {
@@ -93,15 +86,8 @@ public class BookController {
 	}
 	
 	public static void countBooks() {
-		get("/api/book/countbook",(req,res)->{
-			try {
-				return ServiceFactory.getBookService().countBooks();
-			}catch(Exception e) {
-				e.printStackTrace();
-			}
-			return false;
-			});
-	}
+		get("/count",(req,res)->{return ServiceFactory.getBookService().countBooks();});
+		}
 	
 	public static void userBooks() {
 		get("/api/book/user/:id",(req,res)->{

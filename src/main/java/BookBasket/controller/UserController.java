@@ -33,11 +33,16 @@ public class UserController {
 			return new Gson().toJson(ServiceFactory.getUserService().viewAllUser());
 		});
 	}
+	
+	public static void countUser() {
+		get("/user/count",(req,res)->{return ServiceFactory.getUserService().count();});
+	}
 		
 	
 	public static void initUserController() {
 		login();
 		addUser();
 		allUser();
+		countUser();
 	}
 }
