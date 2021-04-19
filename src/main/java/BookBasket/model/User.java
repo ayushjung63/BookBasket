@@ -21,7 +21,6 @@ public class User {
 	@Id
 	@GeneratedValue
 	private int id;
-	
 	private String username;
 	private String password;
 	private String email;
@@ -64,6 +63,12 @@ public class User {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+				+ ", contact=" + contact + ", address=" + address + "]";
+	}
+	
 
 	
 }

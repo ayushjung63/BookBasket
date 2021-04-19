@@ -9,12 +9,27 @@ import BookBasket.model.User;
 import BookBasket.utils.SessionFactory;
 
 public class BookRepoManager implements BookRepo {
+	
 	private static org.hibernate.SessionFactory sessionFactory;
 	private EntityManager session;
 
 	public BookRepoManager() {
 		sessionFactory = SessionFactory.getInstance();
 	}
+	
+	@Override
+	public List<Book> getByKeyword(String keyword) {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<Book> result=session.createNamedQuery("findByKeyword",Book.class).setParameter("keyword","%"+keyword+"%").getResultList();
+		System.out.println(result);
+		session.getTransaction().commit();
+		if(session.isOpen()) {
+			session.close();
+		}
+		return result;
+	}
+
 
 	@Override
 	public Boolean add(Book b) {
@@ -33,15 +48,13 @@ public class BookRepoManager implements BookRepo {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		Book b1=session.find(Book.class, id);
-		
-		b1.setId(id);
+		System.out.println(b1);
+
 		b1.setTitle(b.getTitle());
 		b1.setAuthor(b.getAuthor());
 		b1.setCategory(b.getCategory());
 		b1.setDescription(b.getDescription());
 		b1.setPrice(b.getPrice());
-		b1.setImage(b.getImage());
-		/* b1.setStatus(b.getStatus()); */
 		b1.setType(b.getType());
 
 		session.getTransaction().commit();

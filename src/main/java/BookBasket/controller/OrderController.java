@@ -40,11 +40,19 @@ public class OrderController {
 			return ServiceFactory.getOrderService().count();
 		});	}
 	
+	public static void deleteOrder() {
+		get("/order/delete/:id",(req,res)->{
+			int id=Integer.parseInt(req.params("id"));
+			return ServiceFactory.getOrderService().deleteOrder(id);
+		});
+	}
+	
 	public static void initOrderController() {
 		orderBook();
 		getAllOrder();
 		getParticularOrder();
 		cancelOrder();
 		countOrder();
+		deleteOrder();
 	}
 }

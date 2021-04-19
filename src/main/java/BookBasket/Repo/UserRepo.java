@@ -15,5 +15,7 @@ public interface UserRepo {
 	
 	User editUser(int id,User user);
 	
+	User findUserById(int id);
+	
 	int countUser();
 }

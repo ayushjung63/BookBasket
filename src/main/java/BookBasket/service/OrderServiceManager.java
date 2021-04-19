@@ -4,8 +4,10 @@ import java.util.List;
 
 import BookBasket.Repo.BookRepo;
 import BookBasket.Repo.OrderRepo;
+import BookBasket.Repo.UserRepo;
 import BookBasket.model.Book;
 import BookBasket.model.Book.Status;
+import BookBasket.model.User;
 import BookBasket.model.UserOrder;
 import BookBasket.utils.RepoFactory;
 
@@ -14,6 +16,7 @@ public class OrderServiceManager implements OrderService{
 
 	private OrderRepo orderRepo;
 	private BookRepo bookRepo;
+	private UserRepo userRepo;
 	
 	public OrderServiceManager() {
 		this.orderRepo=RepoFactory.getOrderRepo();
@@ -33,7 +36,7 @@ public class OrderServiceManager implements OrderService{
 		}else if(book.getStatus().equals(Status.BOOKED)){
 			return false;
 		}
-		else {
+		else{
 			bookRepo.bookBook(order.getBook());
 			order.setStatus(1);
 			return orderRepo.addOrder(order);
@@ -57,5 +60,12 @@ public class OrderServiceManager implements OrderService{
 		bookRepo.approveBook(order.getBook().getId());
 		 return true;
 	}
+
+	@Override
+	public boolean deleteOrder(int id) {
+		return orderRepo.delete(id);
+	}
+	
+	
 
 }

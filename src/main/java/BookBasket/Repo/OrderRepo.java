@@ -11,6 +11,6 @@ public interface OrderRepo {
 	List<UserOrder> getUserOrder(int id);
 	boolean cancelOrder(int id);
 	UserOrder getOneOrder(int id);
-	
+	boolean delete(int id);
 	int countOrder();
 }

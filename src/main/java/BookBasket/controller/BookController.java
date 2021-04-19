@@ -46,6 +46,7 @@ public class BookController {
 			Book book = new Gson().fromJson(req.body(), Book.class);
 			System.out.println(book);
 			int id = Integer.parseInt(req.params("id"));
+			System.out.println(id);
 			return ServiceFactory.getBookService().editBook(id,book);
 		});
 	}
@@ -104,6 +105,13 @@ public class BookController {
 		});
 	}
 	
+	public static void searchBook() {
+		get("/api/book/search/:key",(req,res)->{
+			String key=req.params("key");
+			return new Gson().toJson(ServiceFactory.getBookService().viewByKeyword(key));
+		});
+	}
+	
 
 	
 	
@@ -111,6 +119,7 @@ public class BookController {
 	public static void initBookController() {
 		viewAllBooks();
 		add();
+		editBook();
 		viewById();
 		deleteBook();
 		bookType();
@@ -120,5 +129,6 @@ public class BookController {
 		userBooks();
 		approveBook();
 		countBooks();
+		searchBook();
 	}
 }

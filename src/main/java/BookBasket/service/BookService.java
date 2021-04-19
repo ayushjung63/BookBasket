@@ -31,4 +31,6 @@ public interface BookService {
 	int countBooks();
 	
 	List<Book> userBooks(int id);
+	
+	List<Book> viewByKeyword(String key);
 }

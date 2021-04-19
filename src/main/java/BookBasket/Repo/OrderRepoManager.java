@@ -102,5 +102,17 @@ public class OrderRepoManager implements OrderRepo {
 		return order;
 	}
 
+	@Override
+	public boolean delete(int id) {
+		session=sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		UserOrder order=session.find(UserOrder.class, id);
+		session.remove(order);
+		session.getTransaction().commit();
+		return true;
+	}
+	
+	
+
 	
 }

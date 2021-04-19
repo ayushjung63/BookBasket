@@ -14,5 +14,7 @@ public interface UserService {
 	List<User> viewAllUser();
 	
 	int count();
+	
+	boolean deleteUser(int id);
 
 }

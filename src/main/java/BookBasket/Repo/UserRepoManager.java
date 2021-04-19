@@ -57,12 +57,29 @@ public class UserRepoManager implements UserRepo {
 		session=sessionFactory.createEntityManager();
 		session.getTransaction().begin();
 		User user=session.find(User.class, id);
+		System.out.println(user);
 		session.remove(user);
+		session.getTransaction().commit();
 		if(session.isOpen()) {
 			session.close();
 		}
 		return true;
 	}
+	
+	
+
+	@Override
+	public User findUserById(int id) {
+			session=sessionFactory.createEntityManager();
+			session.getTransaction().begin();
+			User user=session.find(User.class, id);
+			
+			if(session.isOpen()) {
+				session.close();
+			}
+			return user;
+		}
+	
 
 	@Override
 	public User editUser(int id,User user) {

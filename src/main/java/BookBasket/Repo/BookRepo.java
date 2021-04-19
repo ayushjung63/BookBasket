@@ -19,4 +19,6 @@ public interface BookRepo {
 	int getcountBooks();
 	
 	List<Book> getUserBook(int id);
+	
+	List<Book> getByKeyword(String keyword);
 }

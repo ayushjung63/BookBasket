@@ -8,14 +8,20 @@ import BookBasket.utils.ServiceFactory;
 
 public class AdminController {
 	
-	private static void addAdmin() {
-		post("/api/admin/addAdmin",(req,res)->{
+	
+	
+	private static void loginAdmin() {
+		post("/api/admin/login",(req,res)->{
 			Admin admin=new Gson().fromJson(req.body(),Admin.class);
-			return ServiceFactory.getAdminService().addAdmin(admin);
+			if(admin.getUser().equals(Admin.username)&&admin.getPw().equals(Admin.password) ) {
+				return true;
+			}else {
+				return false;
+			}
 		});
 	}
 	
 	public static void initAdminController() {
-		addAdmin();
+		loginAdmin();
 	}
 }

@@ -3,33 +3,28 @@ package BookBasket.model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+
 public class Admin {
-	@Id
-	private int adminId;
-	private String username;
-	private String password;
-	public int getAdminId() {
-		return adminId;
+	public static final String username="admin";
+	public static final String password="1234";
+	
+	private String user;
+	private String pw;
+	public String getUser() {
+		return user;
 	}
-	public void setAdminId(int adminId) {
-		this.adminId = adminId;
+	public void setUser(String user) {
+		this.user = user;
 	}
-	public String getUsername() {
-		return username;
+	public String getPw() {
+		return pw;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	@Override
 	public String toString() {
-		return "Admin [adminId=" + adminId + ", username=" + username + ", password=" + password + "]";
+		return "Admin [user=" + user + ", pw=" + pw + "]";
 	}
 	
 	

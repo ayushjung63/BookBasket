@@ -27,6 +27,11 @@ import javax.persistence.OneToOne;
 		@NamedQuery(
 				name="findByUser",
 				query="from Book where addedBy=:user"
+				),
+		@NamedQuery(
+				name="findByKeyword",
+				query="from Book where title like :keyword or author like :keyword or category like :keyword"
+						+ " or type like :keyword or description like :keyword"
 				)
 })
 

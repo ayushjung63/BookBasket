@@ -25,11 +25,19 @@ public class UserServiceManager implements UserService {
 	public int count() {
 		return userRepo.countUser();
 	}
+	
+	
+
+	@Override
+	public boolean deleteUser(int id) {
+		return userRepo.deleteUser(id);
+	}
 
 	@Override
 	public UserDTO login(User u) {
 		User loggedUser= userRepo.getUser(u);
-		if(loggedUser!=null) {
+		System.out.println(u.getPassword()+" "+loggedUser.getPassword());
+		if(loggedUser!=null && u.getPassword().equals(loggedUser.getPassword())) {
 			UserDTO userdto=new UserDTO();
 			userdto.setId(loggedUser.getId());
 			userdto.setUsername(loggedUser.getUsername());
@@ -43,12 +51,7 @@ public class UserServiceManager implements UserService {
 
 	@Override
 	public Boolean addUser(User user) {
-		User loggedUser= userRepo.getUser(user);
-		if(loggedUser==null) {
 			return userRepo.add(user);
-		}else {
-			return false;
-		}
 	}
 
 	@Override

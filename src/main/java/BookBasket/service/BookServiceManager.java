@@ -19,6 +19,12 @@ public class BookServiceManager implements BookService {
 		b.setStatus(Status.ADMINPENDING);
 		return bookRepo.add(b);
 	}
+	
+
+	@Override
+	public List<Book> viewByKeyword(String key) {
+		return bookRepo.getByKeyword(key);
+	}
 
 	@Override
 	public List<Book> viewAllBooks() {
@@ -33,6 +39,7 @@ public class BookServiceManager implements BookService {
 
 	@Override
 	public Boolean editBook(int id,Book b) {
+		System.out.println("here1");
 		return bookRepo.edit(id,b);
 	}
 
