@@ -29,6 +29,11 @@ import javax.persistence.OneToOne;
 				query="from Book where addedBy=:user"
 				),
 		@NamedQuery(
+				name="findOtherBook",
+				query="from Book b where b.status=:status AND "
+						+ "b.addedBy <>:user"
+				),
+		@NamedQuery(
 				name="findByKeyword",
 				query="from Book where title like :keyword or author like :keyword or category like :keyword"
 						+ " or type like :keyword or description like :keyword"

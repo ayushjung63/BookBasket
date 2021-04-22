@@ -3,15 +3,19 @@ package BookBasket.service;
 import java.util.List;
 
 import BookBasket.Repo.BookRepo;
+import BookBasket.Repo.UserRepo;
 import BookBasket.model.Book;
 import BookBasket.model.Book.Status;
+import BookBasket.model.User;
 import BookBasket.utils.RepoFactory;
 
 public class BookServiceManager implements BookService {
 	private BookRepo bookRepo;
+	private UserRepo userRepo;
 	
 	public BookServiceManager() {
 	this.bookRepo=RepoFactory.getBookRepo();
+	this.userRepo=RepoFactory.getUserRepo();
 	}
 	
 	@Override
@@ -88,6 +92,14 @@ public class BookServiceManager implements BookService {
 	public boolean approveBook(int id) {
 		return bookRepo.approveBook(id);
 	}
+
+	@Override
+	public List<Book> viewOtherBooks(int id) {
+		User user=userRepo.findUserById(id);
+		return bookRepo.findOtherBooks(user);
+	}
+	
+	
 
 	
 

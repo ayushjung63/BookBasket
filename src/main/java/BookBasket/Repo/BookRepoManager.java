@@ -206,6 +206,29 @@ public class BookRepoManager implements BookRepo {
 		}
 		return result;
 	}
+
+	@Override
+	public List<Book> findOtherBooks(User user) {
+		String av="AVAILABLE";
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		try{
+			List<Book> result = session.createNamedQuery("findOtherBook",Book.class)
+				.setParameter("status",Status.valueOf(av))
+				.setParameter("user",user).getResultList();
+		session.getTransaction().commit();
+		System.out.println(result);
+		return result;
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		if (session.isOpen()) {
+			session.close();
+		}
+		return null;
+	}
+	
+	
 	
 
 }

@@ -3,6 +3,7 @@ package BookBasket.Repo;
 import java.util.List;
 
 import BookBasket.model.Book;
+import BookBasket.model.User;
 
 public interface BookRepo {
 	Book findById(int id);
@@ -21,4 +22,6 @@ public interface BookRepo {
 	List<Book> getUserBook(int id);
 	
 	List<Book> getByKeyword(String keyword);
+	
+	List<Book> findOtherBooks(User user);
 }

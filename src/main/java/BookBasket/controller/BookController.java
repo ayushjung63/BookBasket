@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 
 import BookBasket.model.Book;
+import BookBasket.model.User;
 import BookBasket.utils.ServiceFactory;
 
 public class BookController {
@@ -112,6 +113,14 @@ public class BookController {
 		});
 	}
 	
+	public static void otherBook() {
+		post("/others",(req,res)->{
+			User user=new Gson().fromJson(req.body(),User.class);
+			System.out.println(req.body());
+			return new Gson().toJson(ServiceFactory.getBookService().viewOtherBooks(user.getId()));
+		});
+	}
+	
 
 	
 	
@@ -130,5 +139,6 @@ public class BookController {
 		approveBook();
 		countBooks();
 		searchBook();
+		otherBook();
 	}
 }

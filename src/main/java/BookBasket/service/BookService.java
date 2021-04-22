@@ -33,4 +33,6 @@ public interface BookService {
 	List<Book> userBooks(int id);
 	
 	List<Book> viewByKeyword(String key);
+	
+	List<Book> viewOtherBooks(int id);
 }
