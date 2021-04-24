@@ -111,6 +111,22 @@ public class OrderRepoManager implements OrderRepo {
 		session.getTransaction().commit();
 		return true;
 	}
+
+	@Override
+	public List<UserOrder> getUserDetails(int id) {
+		User user=new User();
+		user.setId(id);
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		List<UserOrder> allOrder = session.createNamedQuery("findbookOrder",UserOrder.class)
+				.setParameter("user",user).getResultList();
+		session.getTransaction().commit();
+		if (session.isOpen()) {
+			session.close();
+		}
+		return allOrder;
+	}
+	
 	
 	
 

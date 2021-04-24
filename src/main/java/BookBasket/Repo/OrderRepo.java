@@ -13,4 +13,6 @@ public interface OrderRepo {
 	UserOrder getOneOrder(int id);
 	boolean delete(int id);
 	int countOrder();
+	
+	List<UserOrder> getUserDetails(int id);
 }

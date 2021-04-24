@@ -47,6 +47,14 @@ public class OrderController {
 		});
 	}
 	
+	public static void getMyBookOrder() {
+		get("/order/mybookorder/:id",(req,res)->{
+//			int id=Integer.parseInt(req.body());
+			int id=Integer.parseInt(req.params("id"));
+			return new Gson().toJson(ServiceFactory.getOrderService().viewBookOrder(id));
+		});
+	}
+	
 	public static void initOrderController() {
 		orderBook();
 		getAllOrder();
@@ -54,5 +62,6 @@ public class OrderController {
 		cancelOrder();
 		countOrder();
 		deleteOrder();
+		getMyBookOrder();
 	}
 }

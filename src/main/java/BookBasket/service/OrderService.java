@@ -12,6 +12,7 @@ public interface OrderService {
 	boolean deleteOrder(int id);
 	boolean cancelOrder(int id);
 	
+	List<UserOrder> viewBookOrder(int id);
 	
 	int count();
 }

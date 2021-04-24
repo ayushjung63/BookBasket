@@ -65,6 +65,13 @@ public class OrderServiceManager implements OrderService{
 	public boolean deleteOrder(int id) {
 		return orderRepo.delete(id);
 	}
+
+	@Override
+	public List<UserOrder> viewBookOrder(int id) {
+		return orderRepo.getUserDetails(id);
+	}
+	
+	
 	
 	
 

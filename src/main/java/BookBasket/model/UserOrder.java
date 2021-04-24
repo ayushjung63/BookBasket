@@ -14,7 +14,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @NamedQueries({
-	@NamedQuery(name="findParticularOrder",query="from UserOrder where user=:id and status=1")
+	@NamedQuery(name="findParticularOrder",query="from UserOrder where user=:id and status=1"),
+	@NamedQuery(name="findbookOrder",query="from UserOrder where book.addedBy=:user and status=1")
 })
 
 @Entity
