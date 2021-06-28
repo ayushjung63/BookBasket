@@ -55,6 +55,12 @@ public class Book {
 	private Status status;
 	@OneToOne
 	private User addedBy;
+	private Delivery delivery;
+	
+	public enum Delivery{
+		AVAILABLE,
+		NOT_AVAILABLE
+	}
 	
 	public enum Status{
 		AVAILABLE,
@@ -62,11 +68,8 @@ public class Book {
 		BOOKED
 	}
 	
-	
-
 	public Book() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getId() {
@@ -149,12 +152,21 @@ public class Book {
 		this.addedBy = addedBy;
 	}
 
+	public Delivery getDelivery() {
+		return delivery;
+	}
+
+	public void setDelivery(Delivery delivery) {
+		this.delivery = delivery;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", author=" + author + ", price=" + price + ", category="
 				+ category + ", description=" + description + ", type=" + type + ", image=" + image + ", status="
-				+ status + ", addedBy=" + addedBy + "]";
+				+ status + ", addedBy=" + addedBy + ", delivery=" + delivery + "]";
 	}
+
 	
 	
 	

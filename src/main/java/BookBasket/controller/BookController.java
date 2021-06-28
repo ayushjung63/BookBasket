@@ -13,7 +13,6 @@ public class BookController {
 	public static void add() {
 		post("/api/book/add",(req,res)->{
 			Book b=null;
-			//String img=ImageController.uploadImage();
 			try {
 				b=new Gson().fromJson(req.body(), Book.class);
 			}catch(JsonParseException e) {
@@ -24,7 +23,9 @@ public class BookController {
 			if(b.getTitle()==null && b.getTitle()=="") {
 				return new BookBasket.model.Error(400,"Title cannot be null");
 			}
-			return ServiceFactory.getBookService().addBook(b);
+			boolean result= ServiceFactory.getBookService().addBook(b);
+			if(result==false) return "Something Wrong. Book not added.";
+			else return "Book added Sucessfully";
 		});
 	}
 
@@ -76,6 +77,7 @@ public class BookController {
 	
 	public static void availableBooks() {
 		get("/available",(req,res)->{
+			System.out.println("here");
 			return new Gson().toJson( ServiceFactory.getBookService().availableBooks("AVAILABLE"));
 			});
 	}

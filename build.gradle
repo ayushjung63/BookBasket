@@ -11,6 +11,12 @@ plugins {
     id 'java-library'
 }
 
+apply plugin: 'application'
+mainClassName = "BookBasket.AppEntry"
+applicationDefaultJvmArgs = [
+    "-Djava.util.logging.config.file=src/main/resources/logging.properties"
+]
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.

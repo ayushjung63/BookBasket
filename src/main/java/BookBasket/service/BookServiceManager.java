@@ -21,6 +21,8 @@ public class BookServiceManager implements BookService {
 	@Override
 	public boolean addBook(Book b) {
 		b.setStatus(Status.ADMINPENDING);
+		User user=userRepo.findUserById(b.getAddedBy().getId());
+		if(user==null || user.equals("") ) return false;
 		return bookRepo.add(b);
 	}
 	

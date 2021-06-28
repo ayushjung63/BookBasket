@@ -10,6 +10,7 @@ public class OrderController {
 	
 	public static void orderBook() {
 		post("/api/order/addorder",(req,res)->{
+			System.out.println(req.body());
 			UserOrder order=new Gson().fromJson(req.body(),UserOrder.class);
 			return ServiceFactory.getOrderService().addOrder(order);
 		});
