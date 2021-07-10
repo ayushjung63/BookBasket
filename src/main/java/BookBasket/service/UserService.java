@@ -9,7 +9,7 @@ public interface UserService {
 	
 	Boolean addUser(User user);
 	
-	UserDTO login(User user);
+	UserDTO login(User user) throws Exception;
 	
 	List<User> viewAllUser();
 	

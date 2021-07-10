@@ -34,8 +34,10 @@ public class UserServiceManager implements UserService {
 	}
 
 	@Override
-	public UserDTO login(User u) {
+	public UserDTO login(User u) throws Exception {
 		User loggedUser= userRepo.getUser(u);
+		if(loggedUser==null)
+			throw new Exception("No such user exists.");
 		System.out.println(u.getPassword()+" "+loggedUser.getPassword());
 		if(loggedUser!=null && u.getPassword().equals(loggedUser.getPassword())) {
 			UserDTO userdto=new UserDTO();

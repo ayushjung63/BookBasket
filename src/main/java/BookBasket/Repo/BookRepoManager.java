@@ -54,7 +54,7 @@ public class BookRepoManager implements BookRepo {
 		b1.setAuthor(b.getAuthor());
 		b1.setCategory(b.getCategory());
 		b1.setDescription(b.getDescription());
-		b1.setPrice(b.getPrice());
+		b1.setPrice(b.getPrice());	
 		b1.setType(b.getType());
 
 		session.getTransaction().commit();

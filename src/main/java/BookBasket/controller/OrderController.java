@@ -18,6 +18,7 @@ public class OrderController {
 	
 	public static void getAllOrder() {
 		get("/api/order/allorder",(req,res)->{
+			System.out.println("What is Error biro");
 			return new Gson().toJson(ServiceFactory.getOrderService().allOrder());
 		});
 	}
