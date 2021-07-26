@@ -14,7 +14,7 @@ public class ImageController {
 	
 	public static void uploadImage() {
 		post("/api/upload", (req, res) -> {
-	        String destinationFolderLocation = "C:\\Users\\ayush\\eclipse-workspace\\BookBasket\\src\\main\\resources\\public\\images";
+	        String destinationFolderLocation = "E:\\BookBaske\\BookBasket\\src\\main\\resources\\public\\images";
 	        req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement(destinationFolderLocation));
 	        Part filePart = req.raw().getPart("myfile");
 	        String fileName = System.currentTimeMillis() + "_" + filePart.getSubmittedFileName().replace(" ","_");
