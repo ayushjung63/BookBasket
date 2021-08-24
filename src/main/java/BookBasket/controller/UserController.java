@@ -4,6 +4,7 @@ import static spark.Spark.get;
 import static spark.Spark.post;
 import static spark.Spark.delete;
 
+import BookBasket.model.Error;
 import com.google.gson.Gson;
 
 import BookBasket.model.Book;
@@ -25,9 +26,22 @@ public class UserController {
 	public static void addUser() {
 		post("api/user/adduser", (req, res) -> {
 			User user = new Gson().fromJson(req.body(), User.class);
-			System.out.println("Register "+user);
-			return ServiceFactory.getUserService().addUser(user);
-		});
+			System.out.println(user);
+			Boolean checkEmail=ServiceFactory.getUserService().checkUserByEmail(user.getEmail());
+			System.out.println(checkEmail);
+			//Boolean checkUsername = ServiceFactory.getUserService().checkUserByUsername(user.getUsername());
+			if(checkEmail==true){
+				return new Gson().toJson(
+						new Error(409,"User with this email already exits. Please try again with different email"));
+			}
+//			else if(checkUsername==true) {
+//					return new Gson().toJson(new Error(409, "Username taken. Try using other username"));
+//			}
+
+				System.out.println("Register " + user);
+				return ServiceFactory.getUserService().addUser(user);
+
+			});
 	}
 	
 	public static void allUser() {

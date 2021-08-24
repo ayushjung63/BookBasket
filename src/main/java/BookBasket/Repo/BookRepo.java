@@ -24,4 +24,6 @@ public interface BookRepo {
 	List<Book> getByKeyword(String keyword);
 	
 	List<Book> findOtherBooks(User user);
+
+
 }

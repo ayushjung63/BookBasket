@@ -100,9 +100,6 @@ public class BookServiceManager implements BookService {
 		User user=userRepo.findUserById(id);
 		return bookRepo.findOtherBooks(user);
 	}
-	
-	
 
-	
 
 }

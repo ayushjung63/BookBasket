@@ -7,11 +7,16 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.UniqueConstraint;
 
-@NamedQueries(
+@NamedQueries({
 		@NamedQuery(
-			name = "findUserByUsername",
-			query="from User where username=:username"
-	)
+				name = "findUserByUsername",
+				query = "from User where username=:username"
+		),
+		@NamedQuery(
+				name = "findUserByEmail",
+				query = "from User where email=:email"
+		)
+}
 	)
 	
 

@@ -35,4 +35,6 @@ public interface BookService {
 	List<Book> viewByKeyword(String key);
 	
 	List<Book> viewOtherBooks(int id);
+
+
 }

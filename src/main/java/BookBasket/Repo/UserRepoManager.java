@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import BookBasket.model.Book;
 import BookBasket.model.User;
 import BookBasket.utils.SessionFactory;
 
@@ -73,7 +74,7 @@ public class UserRepoManager implements UserRepo {
 			session=sessionFactory.createEntityManager();
 			session.getTransaction().begin();
 			User user=session.find(User.class, id);
-			
+
 			if(session.isOpen()) {
 				session.close();
 			}
@@ -105,8 +106,33 @@ public class UserRepoManager implements UserRepo {
 		return count;
 	}
 
-	
-	
-	
+	@Override
+	public boolean checkUserExistsByEmail(String email) {
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		User result=session.createNamedQuery("findUserByEmail",User.class)
+				.setParameter("email",email).getSingleResult();
+		session.getTransaction().commit();
+		if(result!=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
 
+	@Override
+	public boolean checkUserExistsByUsername(String username) {
+		System.out.println(username);
+		session = sessionFactory.createEntityManager();
+		session.getTransaction().begin();
+		User result=session.createNamedQuery("findUserByUsername",User.class)
+				.setParameter("username",username).getSingleResult();
+		System.out.println(result);
+		session.getTransaction().commit();
+		if(result!=null){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

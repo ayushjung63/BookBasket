@@ -1,5 +1,6 @@
 package BookBasket.service;
 
+import java.sql.SQLOutput;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -36,10 +37,11 @@ public class UserServiceManager implements UserService {
 	@Override
 	public UserDTO login(User u) throws Exception {
 		User loggedUser= userRepo.getUser(u);
+		System.out.println(loggedUser);
 		if(loggedUser==null)
 			throw new Exception("No such user exists.");
-		System.out.println(u.getPassword()+" "+loggedUser.getPassword());
-		if(loggedUser!=null && u.getPassword().equals(loggedUser.getPassword())) {
+		String dbPw=PasswordEncoder.decrypt(loggedUser.getPassword());
+		if(u.getPassword().equals(dbPw)) {
 			UserDTO userdto=new UserDTO();
 			userdto.setId(loggedUser.getId());
 			userdto.setUsername(loggedUser.getUsername());
@@ -53,13 +55,26 @@ public class UserServiceManager implements UserService {
 
 	@Override
 	public Boolean addUser(User user) {
-			return userRepo.add(user);
+		String encodedpw=PasswordEncoder.encrypt(user.getPassword());
+		user.setPassword(encodedpw);
+		System.out.println(encodedpw);
+		return userRepo.add(user);
 	}
 
 	@Override
 	public List<User> viewAllUser() {
 		return userRepo.findAllUser();
 	}
-	
+
+	@Override
+	public Boolean checkUserByEmail(String email) {
+		return userRepo.checkUserExistsByEmail(email);
+	}
+
+	@Override
+	public Boolean checkUserByUsername(String username) {
+		System.out.println(username);
+		return userRepo.checkUserExistsByUsername(username);
+	}
 	
 }

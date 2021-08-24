@@ -18,4 +18,7 @@ public interface UserRepo {
 	User findUserById(int id);
 	
 	int countUser();
+
+	boolean checkUserExistsByEmail(String email);
+	boolean checkUserExistsByUsername(String username);
 }
