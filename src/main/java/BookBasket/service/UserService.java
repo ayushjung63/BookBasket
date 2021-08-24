@@ -18,6 +18,6 @@ public interface UserService {
 	boolean deleteUser(int id);
 
 	Boolean checkUserByEmail(String email);
-	Boolean checkUserByUsername(String username);
+	Boolean checkUserByUsername(User user);
 
 }

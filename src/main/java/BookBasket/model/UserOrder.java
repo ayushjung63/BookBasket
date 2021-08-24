@@ -28,7 +28,7 @@ public class UserOrder{
 	@OneToOne
 	private Book book;
 	private int status;
-	
+
 	public int getId() {
 		return id;
 	}

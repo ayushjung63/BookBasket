@@ -28,16 +28,17 @@ public class UserController {
 			User user = new Gson().fromJson(req.body(), User.class);
 			System.out.println(user);
 			Boolean checkEmail=ServiceFactory.getUserService().checkUserByEmail(user.getEmail());
-			System.out.println(checkEmail);
-			//Boolean checkUsername = ServiceFactory.getUserService().checkUserByUsername(user.getUsername());
+			System.out.println("Email:" +checkEmail);
+			Boolean checkUsername = ServiceFactory.getUserService().checkUserByUsername(user);
+			System.out.println("Username: "+checkUsername);
 			if(checkEmail==true){
 				return new Gson().toJson(
 						new Error(409,"User with this email already exits. Please try again with different email"));
 			}
-//			else if(checkUsername==true) {
-//					return new Gson().toJson(new Error(409, "Username taken. Try using other username"));
-//			}
-
+			if(checkUsername==true) {
+					return new Gson().toJson(
+							new Error(409, "Username taken. Try using other username"));
+			}
 				System.out.println("Register " + user);
 				return ServiceFactory.getUserService().addUser(user);
 

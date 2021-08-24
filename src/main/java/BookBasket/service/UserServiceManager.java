@@ -57,7 +57,6 @@ public class UserServiceManager implements UserService {
 	public Boolean addUser(User user) {
 		String encodedpw=PasswordEncoder.encrypt(user.getPassword());
 		user.setPassword(encodedpw);
-		System.out.println(encodedpw);
 		return userRepo.add(user);
 	}
 
@@ -72,9 +71,9 @@ public class UserServiceManager implements UserService {
 	}
 
 	@Override
-	public Boolean checkUserByUsername(String username) {
-		System.out.println(username);
-		return userRepo.checkUserExistsByUsername(username);
+	public Boolean checkUserByUsername(User user) {
+		System.out.println("Service");
+		return userRepo.checkUserUsername(user);
 	}
 	
 }

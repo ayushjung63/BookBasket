@@ -44,9 +44,14 @@ public class UserRepoManager implements UserRepo {
 	public  User getUser(User user) {
 		session=sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		User dbUser=(User) session.createNamedQuery("findUserByUsername",User.class)
-				.setParameter("username", user.getUsername()).getSingleResult();
-		session.getTransaction().commit();
+		User dbUser=null;
+		try {
+			dbUser = (User) session.createNamedQuery("findUserByUsername", User.class)
+					.setParameter("username", user.getUsername()).getSingleResult();
+		}catch(Exception e){
+			dbUser=null;
+		}
+		 session.getTransaction().commit();
 		if(session.isOpen()) {
 			session.close();
 		}
@@ -110,9 +115,14 @@ public class UserRepoManager implements UserRepo {
 	public boolean checkUserExistsByEmail(String email) {
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		User result=session.createNamedQuery("findUserByEmail",User.class)
-				.setParameter("email",email).getSingleResult();
-		session.getTransaction().commit();
+		User result=null;
+		try {
+			result = session.createNamedQuery("findUserByEmail", User.class)
+					.setParameter("email", email).getSingleResult();
+			session.getTransaction().commit();
+		}catch(Exception e){
+			result=null;
+		}
 		if(result!=null){
 			return true;
 		}else{
@@ -121,18 +131,26 @@ public class UserRepoManager implements UserRepo {
 	}
 
 	@Override
-	public boolean checkUserExistsByUsername(String username) {
-		System.out.println(username);
-		session = sessionFactory.createEntityManager();
+	public boolean checkUserUsername(User user) {
+		System.out.println("Repo");
+		session=sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		User result=session.createNamedQuery("findUserByUsername",User.class)
-				.setParameter("username",username).getSingleResult();
-		System.out.println(result);
+		User dbUser=null;
+		try {
+			dbUser = (User) session.createNamedQuery("findUserByUsername", User.class)
+					.setParameter("username", user.getUsername()).getSingleResult();
+		}catch(Exception e){
+			e.printStackTrace();
+			dbUser=null;
+		}
 		session.getTransaction().commit();
-		if(result!=null){
-			return true;
+		if(session.isOpen()) {
+			session.close();
+		}
+		if(dbUser!=null){
+			return  true;
 		}else{
-			return false;
+			return  false;
 		}
 	}
 }
