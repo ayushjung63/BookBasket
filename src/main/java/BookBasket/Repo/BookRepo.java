@@ -11,8 +11,8 @@ public interface BookRepo {
 	Boolean add(Book b);
 	Boolean edit(int id,Book b);
 	Boolean delete(int id);
-	List<Book> getByType(String type);
-	List<Book> getByCategory(String category);
+	List<Book> getByType(String type,User user);
+	List<Book> getByCategory(String category,User user);
 	List<Book> getByAuthor(String author);
 	Boolean approveBook(int id);
 	Boolean bookBook(Book book);

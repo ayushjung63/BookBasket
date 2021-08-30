@@ -88,10 +88,23 @@ public class BookRepoManager implements BookRepo {
 	}
 
 	@Override
-	public List<Book> getByType(String type) {
+	public List<Book> getByType(String type,User user) {
+		System.out.println(type+" Service "+user);
+		String ab="AVAILABLE";
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		List<Book> result=session.createNamedQuery("findBytype",Book.class).setParameter("type",type).getResultList();
+		List<Book> result=null;
+		try {
+			result = session.createNamedQuery("findBytype", Book.class).
+					setParameter("type", type)
+					.setParameter("user", user)
+					.setParameter("status", Status.valueOf(ab)).getResultList();
+		}catch(Exception e){
+			result= session.createNamedQuery("findBytype1", Book.class).
+					 setParameter("type", type)
+					.setParameter("status",Status.valueOf(ab))
+					.getResultList();
+		}
 		System.out.println(result);
 		session.getTransaction().commit();
 		if(session.isOpen()) {
@@ -115,11 +128,21 @@ public class BookRepoManager implements BookRepo {
 	}
 
 	@Override
-	public List<Book> getByCategory(String category) {
+	public List<Book> getByCategory(String category,User user) {
+		String ab="AVAILABLE";
 		session = sessionFactory.createEntityManager();
 		session.getTransaction().begin();
-		List<Book> result=session.createNamedQuery("findByCategory",Book.class)
-				.setParameter("category",category).getResultList();
+		List<Book> result=null;
+		try{
+			result=session.createNamedQuery("findByCategory",Book.class)
+					.setParameter("category",category)
+					.setParameter("user",user)
+					.setParameter("status",Status.valueOf("AVAILABLE")).getResultList();
+		}catch(Exception e){
+			result=session.createNamedQuery("findByCategory1",Book.class)
+					.setParameter("category",category)
+					.setParameter("status",Status.valueOf(ab)).getResultList();
+		}
 		return result;
 	}
 

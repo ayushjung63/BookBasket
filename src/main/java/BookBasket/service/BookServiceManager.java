@@ -55,13 +55,14 @@ public class BookServiceManager implements BookService {
 	}
 
 	@Override
-	public List<Book> viewByType(String type) {
-		return bookRepo.getByType(type);
+	public List<Book> viewByType(String type,User user) {
+		System.out.println(type+" Service "+user);
+		return bookRepo.getByType(type,user);
 	}
 
 	@Override
-	public List<Book> viewByCategory(String category) {
-		return bookRepo.getByCategory(category);
+	public List<Book> viewByCategory(String category,User user) {
+		return bookRepo.getByCategory(category,user);
 	}
 
 	@Override

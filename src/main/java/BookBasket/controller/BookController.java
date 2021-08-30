@@ -62,16 +62,19 @@ public class BookController {
 	}
 	
 	public static void bookType() {
-		get("/api/book/type/:type",(req,res)->{
+		post("/api/book/type/:type",(req,res)->{
 			String type=req.params("type");
-			return new Gson().toJson(ServiceFactory.getBookService().viewByType(type));
+			User user=new Gson().fromJson(req.body(), User.class);
+			System.out.println(user);
+			return new Gson().toJson(ServiceFactory.getBookService().viewByType(type,user));
 		});
 	}
 	
 	public static void bookCategory() {
-		get("/api/book/category/:category",(req,res)->{
+		post("/api/book/category/:category",(req,res)->{
 			String category=req.params("category");
-			return new Gson().toJson(ServiceFactory.getBookService().viewByCategory(category));
+			User user=new Gson().fromJson(req.body(),User.class);
+			return new Gson().toJson(ServiceFactory.getBookService().viewByCategory(category,user));
 		});
 	}
 	

@@ -10,12 +10,24 @@ import javax.persistence.OneToOne;
 @NamedQueries({
 		@NamedQuery(
 				name="findBytype",
-				query="from Book where type=:type"
+				query="from Book b where b.type=:type AND  " +
+						"b.addedBy <>:user AND " + "b.status=:status"
 				),
 		@NamedQuery(
+				name="findBytype1",
+				query="from Book b where b.type=:type AND  " +
+						  "b.status=:status"
+		),
+		@NamedQuery(
 				name="findByCategory",
-				query="from Book where category=:category"
+				query="from Book b where b.category=:category AND " +
+						"b.addedBy <>:user AND " + "b.status=:status"
 				),
+		@NamedQuery(
+				name="findByCategory1",
+				query="from Book b where b.category=:category AND " +
+					  "b.status=:status"
+		),
 		@NamedQuery(
 				name="findByStatus",
 				query="from Book where status=:status"
